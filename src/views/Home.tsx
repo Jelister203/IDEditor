@@ -1,4 +1,5 @@
 import {
+  FlatList,
     Pressable,
     StyleSheet,
     Text,
@@ -10,62 +11,63 @@ import {
     useState
 } from 'react';
 
-import {
-  IGenre,
-  getGenres
-} from '../services/movieService';
-
 import ScrollContainer from '../containers/ScrollContainer';
 import { MainStackParamList } from '../../App';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Editor from './Editor';
-
+import axios from 'axios';
+import styles from '../ccs/Style';
 type homeProps = NativeStackScreenProps<MainStackParamList, 'Home'>;
 const Home = (props: homeProps) => {
-  const [genres, setGenres] = useState<IGenre[]>([]);
+  const [names, setNames] = useState(String);
   useEffect(() => {
-    setGenres(getGenres());
-  }, []);
+      const fetchData = async () => {
+        try {
+          const response = await axios.get('http://10.0.2.2:5000/browse');
+          setNames(response.data);
+        } catch (error) {
+          setNames("404");
+        }
+      };
+  
+      fetchData();
+    }, []);
   return (
     <ScrollContainer>
-      {/* {genres.map(genre => {
-        return (
+      <FlatList
+        data={names}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
           <Pressable onPress={() =>
-            props.navigation.navigate('Genre', {genre: genre})}>
-              <Text style={styles.genreLabel}>
-                {genre.name}
-              </Text>
-          </Pressable>
-        );
-      })} */}
-    
-    <Pressable onPress={() =>
             props.navigation.navigate('Editor', {editor: Editor})}>
-              <Text style={styles.editorLabel}>
-                Go to Editor
-              </Text>
+            <Text style={styles.labelButton}>{item[1]}</Text>
           </Pressable>
+        )}
+      />
+      <Pressable style={styles.appButtonContainer} onPress={() =>
+        props.navigation.navigate('Editor', {editor: Editor})}>
+        <Text style={styles.labelBold}>
+          Go to Editor
+        </Text>
+      </Pressable>
+      <Pressable style={styles.appButtonContainer} onPress={() => {
+        var fetchData = async () => {
+          try {
+            const response = await axios.get('http://10.0.2.2:5000/browse');
+            setNames(response.data);
+          } catch (error) {
+            setNames("404");
+          }}
+          fetchData();
+      }}>
+      <Text style={styles.labelBold}>
+        Update
+      </Text>
+
+      </Pressable>
     </ScrollContainer>
   );
 };
 
-const styles = StyleSheet.create({
-    genreLabel: {
-    fontSize: 20,
-    marginBottom: 10,
-    marginLeft: 20,
-    },
-    editorLabel: {
-    fontSize: 20,
-    marginBottom: 10,
-    marginLeft: 20,
-    fontWeight: "bold",
-    },
-    genreTitle: {
-    fontSize: 30,
-    marginBottom: 10,
-    fontWeight: "bold",
-    marginLeft: 5,
-    },
-   });
+
 export default Home;

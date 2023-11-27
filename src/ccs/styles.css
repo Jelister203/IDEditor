@@ -1,0 +1,19 @@
+style {
+    genreLabel {
+        font-size: 20;
+        margin-bottom: 10;
+        margin-left: 20;
+    };
+    editorLabel {
+        font-size: 20;
+        margin-bottom: 10;
+        margin-left: 20;
+        font-weight: "bold";
+    };
+    genreTitle {
+        font-size: 30;
+        margin-bottom: 10;
+        font-weight: "bold";
+        margin-left: 5;
+    };
+   }

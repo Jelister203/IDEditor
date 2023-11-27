@@ -3,6 +3,7 @@ import {
     ScrollView,
     StyleSheet
 } from 'react-native';
+import styles from '../ccs/Style';
 
 
 interface ScrollContainerProps {
@@ -10,27 +11,14 @@ interface ScrollContainerProps {
    }
    const ScrollContainer = (props: ScrollContainerProps) => {
     return (
-    <SafeAreaView style={styles.backgroundStyle}>
+    <SafeAreaView style={styles.title}>
     <ScrollView
     contentInsetAdjustmentBehavior="automatic"
-    contentContainerStyle={styles.contentContainer}
-    style={styles.backgroundStyle}>
+    contentContainerStyle={styles.label}
+    style={styles.label}>
     {props.children}
     </ScrollView>
     </SafeAreaView>
     );
    };
-   const styles = StyleSheet.create({
-    contentContainer: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    },
-    backgroundStyle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    },
-   });
-
 export default ScrollContainer;
