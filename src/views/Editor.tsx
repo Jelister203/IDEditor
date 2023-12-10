@@ -12,7 +12,11 @@ const Editor = (props: editorProps) => {
     //const [name, setName] = useState('');
     return (
         <ScrollContainer>
-            <Pressable onPress={() => {}}>
+            <TextInput>
+                {props.route.params.code}
+            </TextInput>
+            <Pressable onPress={() => 
+                {}}>
                 <Text style={styles.title}>
                     Save
                 </Text>

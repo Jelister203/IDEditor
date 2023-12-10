@@ -6,7 +6,11 @@ import Editor from './src/views/Editor';
 
 export type MainStackParamList = {
   'Home': {home: typeof Home}
-  'Editor': {editor: typeof Editor}
+  'Editor': {
+    editor: typeof Editor,
+    code: String,
+    id: Number
+  }
 }
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
