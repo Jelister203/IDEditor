@@ -1,8 +1,8 @@
 import {
   FlatList,
-    Pressable,
-    StyleSheet,
-    Text,
+  Pressable,
+  StyleSheet,
+  Text,
     
 } from 'react-native';
 
@@ -23,6 +23,7 @@ const Home = (props: homeProps) => {
   useEffect(() => {
       const fetchData = async () => {
         try {
+          console.log('Fetching data from Python server...')
           const response = await axios.get('http://10.0.2.2:5000/browse');
           setNames(response.data);
           console.log(names)
@@ -57,7 +58,6 @@ const Home = (props: homeProps) => {
       <Text style={styles.labelBold}>
         Update
       </Text>
-
       </Pressable>
     </ScrollContainer>
   );

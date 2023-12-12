@@ -26,6 +26,16 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
       },
+    codeInput: {
+        fontFamily: 'monospace',
+        fontSize: 16,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        backgroundColor: '#f7f7f7',
+        color: '#333',
+    },
     labelBold: {
     fontSize: 20,
     alignSelf: "center",
