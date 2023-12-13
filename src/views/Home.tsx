@@ -19,20 +19,27 @@ import axios from 'axios';
 import styles from '../ccs/Style';
 type homeProps = NativeStackScreenProps<MainStackParamList, 'Home'>;
 const Home = (props: homeProps) => {
+  console.log("back")
   const [names, setNames] = useState(String);
-  useEffect(() => {
-      const fetchData = async () => {
-        try {
-          console.log('Fetching data from Python server...')
-          const response = await axios.get('http://10.0.2.2:5000/browse');
-          setNames(response.data);
-          console.log(names)
-        } catch (error) {
-          setNames("404");
-        }
-      };
-      fetchData();
-    }, []);
+  // useEffect(() => {
+  //     const fetchData = async () => {
+  //       try {
+  //         const response = await axios.get('http://10.0.2.2:5000/browse');
+  //         setNames(response.data);
+  //       } catch (error) {
+  //         setNames("404");
+  //       }
+  //     };
+  //     fetchData();
+  //   }, []);
+  var fetchData = async () => {
+    try {
+      const response = await axios.get('http://10.0.2.2:5000/browse');
+      setNames(response.data);
+    } catch (error) {
+      setNames("404");
+    }}
+    fetchData();
   return (
     <ScrollContainer>
       <FlatList
@@ -40,7 +47,7 @@ const Home = (props: homeProps) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <Pressable onPress={() =>
-            props.navigation.navigate('Editor', {editor: Editor, code: item[2], id: Number(item[0])})}>
+            props.navigation.navigate('Editor', {editor: Editor, code: item[2], id: Number(item[0]), upd: fetchData})}>
             <Text style={styles.labelButton}>{item[1]}</Text>
           </Pressable>
         )}

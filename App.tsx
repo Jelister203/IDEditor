@@ -9,7 +9,8 @@ export type MainStackParamList = {
   'Editor': {
     editor: typeof Editor,
     code: String,
-    id: Number
+    id: Number,
+    upd: Function
   }
 }
 const MainStack = createNativeStackNavigator<MainStackParamList>();

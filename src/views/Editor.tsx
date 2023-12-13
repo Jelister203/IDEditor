@@ -9,6 +9,12 @@ import EDButton from "../components/EDButton";
 
 type editorProps = NativeStackScreenProps<MainStackParamList, 'Editor'>;
 const Editor = (props: editorProps) => {
+  
+const decodeFromUnicode = (str: string) => {
+  return str.replace(/\\u[\dA-Fa-f]{4}/g, (match) => {
+    return String.fromCharCode(parseInt(match.replace(/\\u/g,''), 16));
+  });
+}
     const encodeToUnicode = (str: string) => {
         let unicodeString = '';
         for (let i = 0; i < str.length; i++) {
@@ -20,15 +26,10 @@ const Editor = (props: editorProps) => {
         }
         return unicodeString;
       }
-    const decodeFromUnicode = (str: string) => {
-        return str.replace(/\\u[\dA-Fa-f]{4}/g, (match) => {
-          return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
-        });
-      }
     const url: string = 'http://10.0.2.2:5000/file/'+props.route.params.id
     const [inputValue, setInputValue] = useState(decodeFromUnicode(props.route.params.code.toString()));
     const handleInputChange = (text: string) => {
-        setInputValue(inputValue+text.toString());
+        setInputValue(text.toString());
       };
     //const [name, setName] = useState('');
     return (
@@ -41,19 +42,20 @@ const Editor = (props: editorProps) => {
             ></TextInput>
             <Pressable onPress={() => {
                 // должно сохранятб.
-                var patchData = async () => {try {
+                var patchData = async () => {
+                  try {
                     const response = await axios.patch(url, {code:encodeToUnicode(inputValue).toString()});
-                }
-                catch (error) {
-
+                  }
+                  catch (error) {
                 }};
                 patchData();
+                props.route.params.upd()
             }}>
                 <Text style={styles.title}>
                     Save
                 </Text>
             </Pressable>
-            {EDButton(handleInputChange)}
+            {EDButton(handleInputChange, inputValue)}
         </ScrollContainer>
     );
 };
