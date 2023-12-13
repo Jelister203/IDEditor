@@ -1,1 +1,2 @@
-npx react-native run-android
+START py.bat
+START js.bat

@@ -19,7 +19,6 @@ import axios from 'axios';
 import styles from '../ccs/Style';
 type homeProps = NativeStackScreenProps<MainStackParamList, 'Home'>;
 const Home = (props: homeProps) => {
-  console.log("back")
   const [names, setNames] = useState(String);
   // useEffect(() => {
   //     const fetchData = async () => {

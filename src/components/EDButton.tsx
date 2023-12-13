@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, TouchableOpacity, Platform, Pressable} from 'react-native';
+import styles from '../ccs/Style';
 
 const EDButton = (funcToPress: Function, str: string) => {
   
@@ -29,12 +30,11 @@ const decodeFromUnicode = (str: string) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <Pressable style={styles.button} onPress={handleButtonPress}>
-            <Text style={styles.buttonText}>Вставить</Text>
+        <View>
+          <Pressable style={styles.labelBold} onPress={handleButtonPress}>
+            <Text style={styles.labelBold}>Вставить</Text>
           </Pressable>
         </View>
       </TouchableWithoutFeedback>
@@ -42,28 +42,5 @@ const decodeFromUnicode = (str: string) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  inner: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-  },
-});
 
 export default EDButton;

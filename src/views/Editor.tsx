@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { MainStackParamList } from "../../App";
 import axios from 'axios';
-import { FlatList, PermissionsAndroid, Pressable, StyleSheet, Text, TextInput, TextInputComponent } from "react-native";
+import { FlatList, PermissionsAndroid, Pressable, StyleSheet, Text, TextInput, TextInputComponent, View } from "react-native";
 import ScrollContainer from "../containers/ScrollContainer";
 import React, { useEffect, useState } from "react";
 import styles from '../ccs/Style';
@@ -40,6 +40,7 @@ const decodeFromUnicode = (str: string) => {
                 value={inputValue}
                 onChangeText={handleInputChange}
             ></TextInput>
+            <View style={styles.appButtonContainer}>
             <Pressable onPress={() => {
                 // должно сохранятб.
                 var patchData = async () => {
@@ -51,11 +52,14 @@ const decodeFromUnicode = (str: string) => {
                 patchData();
                 props.route.params.upd()
             }}>
-                <Text style={styles.title}>
+                <Text style={styles.labelBold}>
                     Save
                 </Text>
             </Pressable>
+            </View>
+            <View style={styles.appButtonContainer}>
             {EDButton(handleInputChange, inputValue)}
+            </View>
         </ScrollContainer>
     );
 };

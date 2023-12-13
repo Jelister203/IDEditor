@@ -22,12 +22,12 @@ const App = () => {
         <MainStack.Screen
           name="Home"
           component={Home}
-          options={{title: 'IDEditor'}}
+          options={{title: 'IDEditor', headerStyle:{backgroundColor: "#181818"}, headerTintColor:"#f1f1f1",contentStyle:{backgroundColor: "#181818"}}}
         />
         <MainStack.Screen
           name="Editor"
           component={Editor}
-          options={{title: 'Editor'}}
+          options={{title: 'Editor', headerStyle:{backgroundColor: "#181818"}, headerTintColor:"#f1f1f1", contentStyle:{backgroundColor: "#181818"}}}
         />
       </MainStack.Navigator>
     </NavigationContainer>
